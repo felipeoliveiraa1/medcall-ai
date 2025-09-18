@@ -1,26 +1,7 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // experimental.appDir não é mais necessário nas versões atuais
-  // Garantir que as variáveis NEXT_PUBLIC_ sejam expostas ao cliente
-  env: {
-    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-    NEXT_PUBLIC_GATEWAY_URL: process.env.NEXT_PUBLIC_GATEWAY_URL,
-    NEXT_PUBLIC_GATEWAY_HTTP_URL: process.env.NEXT_PUBLIC_GATEWAY_HTTP_URL,
-    NEXT_PUBLIC_LIVEKIT_URL: process.env.NEXT_PUBLIC_LIVEKIT_URL,
-    NEXT_PUBLIC_LIVEKIT_API_KEY: process.env.NEXT_PUBLIC_LIVEKIT_API_KEY,
-  },
-  
-  // Permitir acesso de domínios de túnel durante desenvolvimento
-  // Evita o aviso: "Cross origin request detected ... configure allowedDevOrigins"
-  //allowedDevOrigins: [
-  //  'https://*.loca.lt',
-  //],
-  
-  // Variáveis NEXT_PUBLIC_ são automaticamente expostas ao cliente
   
   // Headers para WebRTC e áudio
   async headers() {
@@ -52,27 +33,16 @@ const nextConfig = {
       };
     }
 
-    // Permitir importação de worklets
-    config.module.rules.push({
-      test: /\.worklet\.(js|ts)$/,
-      use: {
-        loader: 'worklet-loader',
-        options: {
-          name: 'static/worklets/[name].[hash:8].[ext]',
-        },
-      },
-    });
-
     return config;
   },
 
   // Configurações de imagens
   images: {
-    domains: ['localhost', 'your-domain.com'],
+    domains: ['localhost'],
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'your-project.supabase.co',
+        hostname: '*.supabase.co',
         port: '',
         pathname: '/storage/v1/object/public/**',
       },
@@ -90,16 +60,6 @@ const nextConfig = {
     ];
   },
 
-  // Rewrites para API
-  async rewrites() {
-    return [
-      {
-        source: '/api/gateway/:path*',
-        destination: `${process.env.GATEWAY_URL || 'http://localhost:3001'}/api/:path*`,
-      },
-    ];
-  },
-
   // Configurações de transpilação
   transpilePackages: [
     '@livekit/components-react',
@@ -107,9 +67,6 @@ const nextConfig = {
     'livekit-client',
   ],
 
-  // Configurações de output
-  output: 'standalone',
-  
   // Configurações de compilação
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
@@ -136,4 +93,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
