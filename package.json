@@ -64,5 +64,9 @@
   },
   "dependencies": {
     "dotenv": "^17.2.2"
+  },
+  "scripts": {
+    "build": "cd apps/frontend && npm install && npm run build",
+    "install": "cd apps/frontend && npm install"
   }
 }
