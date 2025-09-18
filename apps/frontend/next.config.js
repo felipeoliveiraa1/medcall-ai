@@ -1,18 +1,4 @@
 /** @type {import('next').NextConfig} */
-const path = require('path');
-const fs = require('fs');
-
-// Carregar .env.local explicitamente
-const envPath = path.resolve(process.cwd(), '.env.local');
-if (fs.existsSync(envPath)) {
-  require('dotenv').config({ path: envPath });
-  //console.log('[DEBUG] .env.local carregado:', {
-  //  SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ? 'present' : 'missing',
-  //  SUPABASE_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? 'present' : 'missing',
-  //});
-} else {
-  console.error('[ERROR] .env.local não encontrado em:', envPath);
-}
 
 const nextConfig = {
   reactStrictMode: true,
