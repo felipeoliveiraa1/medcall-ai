@@ -1,0 +1,32 @@
+# Ignorar arquivos desnecessários para o build
+node_modules
+.git
+.env
+.env.local
+.env.production.local
+.env.development.local
+.next
+out
+dist
+build
+coverage
+.nyc_output
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Ignorar outros apps que não são o frontend
+apps/gateway
+packages
+tools
+docs
+database
+scripts
+configs
