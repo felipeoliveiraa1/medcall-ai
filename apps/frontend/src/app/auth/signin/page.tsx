@@ -281,8 +281,8 @@ export default function SignInPage() {
                   cursor: 'pointer',
                   textDecoration: 'none'
                 }}
-                onMouseEnter={(e) => e.target.style.opacity = '0.8'}
-                onMouseLeave={(e) => e.target.style.opacity = '1'}
+                onMouseEnter={(e) => (e.target as HTMLElement).style.opacity = '0.8'}
+                onMouseLeave={(e) => (e.target as HTMLElement).style.opacity = '1'}
               >
                 Esqueceu sua senha?
               </button>
@@ -323,8 +323,8 @@ export default function SignInPage() {
                     color: '#A6CE39',
                     textDecoration: 'none'
                   }}
-                  onMouseEnter={(e) => e.target.style.opacity = '0.8'}
-                  onMouseLeave={(e) => e.target.style.opacity = '1'}
+                  onMouseEnter={(e) => (e.target as HTMLElement).style.opacity = '0.8'}
+                  onMouseLeave={(e) => (e.target as HTMLElement).style.opacity = '1'}
                 >
                   Criar conta
                 </Link>

@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Camera, Mic, Play, Settings, AlertCircle, User, CheckCircle, Volume2 } from 'lucide-react';
 import { useMediaDevices } from '@/hooks/useMediaDevices';
 
-export default function OnlineSetupPage() {
+function OnlineSetupContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -315,5 +315,13 @@ export default function OnlineSetupPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OnlineSetupPage() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <OnlineSetupContent />
+    </Suspense>
   );
 }

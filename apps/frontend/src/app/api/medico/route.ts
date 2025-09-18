@@ -152,7 +152,7 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     console.error('❌ Erro geral:', error);
     return NextResponse.json(
-      { error: 'Erro interno do servidor', details: error.message },
+      { error: 'Erro interno do servidor', details: error instanceof Error ? error.message : 'Erro desconhecido' },
       { status: 500 }
     );
   }

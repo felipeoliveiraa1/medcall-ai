@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
     
     console.log('✅ Usuário autenticado:', {
       id: userId,
-      email: session.user.email,
-      name: session.user.user_metadata?.name || session.user.email
+      email: session?.user?.email,
+      name: session?.user?.user_metadata?.name || session?.user?.email
     });
     
     // Verificar se usuário já existe na tabela users
@@ -49,8 +49,8 @@ export async function POST(request: NextRequest) {
     console.log('🔄 Criando usuário na tabela users...');
     const newUser = {
       id: userId,
-      email: session.user.email!,
-      name: session.user.user_metadata?.name || session.user.email!.split('@')[0],
+      email: session?.user?.email!,
+      name: session?.user?.user_metadata?.name || session?.user?.email!.split('@')[0],
       is_doctor: true, // Assumir que é médico por padrão
       subscription_type: 'FREE'
     };
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
     console.error('❌ Erro geral:', error);
     return NextResponse.json({
       error: 'Erro interno do servidor',
-      details: error.message
+      details: error instanceof Error ? error.message : 'Erro desconhecido'
     }, { status: 500 });
   }
 }

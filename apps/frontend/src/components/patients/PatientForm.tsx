@@ -150,7 +150,7 @@ export function PatientForm({ patient, onSubmit, onCancel, title }: PatientFormP
         Object.entries(formData).filter(([_, value]) => 
           value !== '' && value !== undefined && value !== null
         )
-      );
+      ) as CreatePatientData;
       
       console.log('📋 Dados do formulário antes do envio:', formData);
       console.log('🧹 Dados limpos para envio:', cleanedData);
